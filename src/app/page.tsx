@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { db } from "~/server/db";
 
 export const dynamic = "force-dynamic"
@@ -8,14 +9,15 @@ export const dynamic = "force-dynamic"
 
 export default async function HomePage() {
 
-  const images = await db.query.Images.findMany({
-    orderBy: (model , {desc}) => desc(model.id)
-  })
-  
+  const Images = async() =>{
 
-  return (
-    <main className="">
-     <div className=" flex flex-wrap gap-4 mt-5">
+    const images = await db.query.Images.findMany({
+      orderBy: (model , {desc}) => desc(model.id)
+    })
+
+    return(
+
+      <div className=" flex flex-wrap gap-4 mt-5">
       {[...images,...images,...images].map((image, index)=>(
         <div key={image.id + "-" + index} className="w-48 flex flex-col">
           <img src={image.url}  alt="Images"/> 
@@ -23,6 +25,22 @@ export default async function HomePage() {
         </div>
       ))}
      </div>
+
+    )
+  }
+
+  
+  
+
+  return (
+    <main className="">
+      <SignedOut>
+        <div className=" h-full w-full text-center text-2xl p-4"> Please Sign in</div>
+      </SignedOut>
+      <SignedIn>
+        <Images/>
+      </SignedIn>
+     
     </main>
   );
 }
