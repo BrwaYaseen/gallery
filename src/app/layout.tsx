@@ -1,6 +1,9 @@
 import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
+import { ClerkProvider} from "@clerk/nextjs";
+import { Nav } from "./_components/nav";
+
 
 export const metadata = {
   title: "my Gellary",
@@ -8,25 +11,20 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-const TopNav = () => {
-  return(
-    <nav className=" flex items-center justify-between w-full text-xl border-b font-semibold p-4">
-      <div>Gallery</div>
-      <div>Sign In</div>
-    </nav>
-  )
-}
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
+    <ClerkProvider>
     <html lang="en" className={`${GeistSans.variable} flex flex-col gap-3`}>
       <body>
-        <TopNav/>
+        <Nav/>
         {children}
       </body>
     </html>
+    </ClerkProvider>
   );
 }
