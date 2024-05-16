@@ -18,7 +18,7 @@ const mockImages = mockUrls.map((url, index)=> ({
 export default async function HomePage() {
 
   const posts = await db.query.posts.findMany()
-  console.log(posts)
+  
 
   return (
     <main className="">
