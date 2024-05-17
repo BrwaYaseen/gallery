@@ -1,8 +1,12 @@
 import "~/styles/globals.css";
+import "@uploadthing/react/styles.css";
 
 import { GeistSans } from "geist/font/sans";
 import { ClerkProvider} from "@clerk/nextjs";
 import { Nav } from "./_components/nav";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { ourFileRouter } from "./api/uploadthing/core";
+import { extractRouterConfig } from "uploadthing/server";
 
 
 export const metadata = {
@@ -20,6 +24,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en" className={`${GeistSans.variable} flex flex-col gap-3`}>
+    <NextSSRPlugin
+         
+          routerConfig={extractRouterConfig(ourFileRouter)}
+        />
       <body>
         <Nav/>
         {children}
