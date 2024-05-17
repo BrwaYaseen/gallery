@@ -1,7 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { db } from "~/server/db";
+import Image from "next/image";
+import { getUserImages } from "~/server/queries";
+
 
 export const dynamic = "force-dynamic"
 
@@ -11,16 +12,15 @@ export default async function HomePage() {
 
   const Images = async() =>{
 
-    const images = await db.query.Images.findMany({
-      orderBy: (model , {desc}) => desc(model.id)
-    })
+    const images = await getUserImages()
 
     return(
 
-      <div className=" flex flex-wrap gap-4 mt-5">
+      <div className=" flex flex-wrap gap-4 mt-5 justify-center">
       {images.map((image)=>(
         <div key={image.id} className="w-48 flex flex-col">
-          <img src={image.url}  alt="Images"/> 
+          <Image src={image.url} style={{objectFit: "contain"}}
+          height={194} width={194}  alt="Images"/> 
           <div>{image.name}</div>
         </div>
       ))}
