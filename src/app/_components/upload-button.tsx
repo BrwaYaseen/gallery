@@ -41,6 +41,7 @@ function UploadSVG() {
       strokeWidth={1.5}
       stroke="currentColor"
       className="h-6 w-6"
+      color="white"
     >
       <path
         strokeLinecap="round"

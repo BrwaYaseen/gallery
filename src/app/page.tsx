@@ -27,6 +27,7 @@ export default async function HomePage() {
           <div>{image.name}</div>
         </div>
       ))}
+      
      </div>
 
     )
