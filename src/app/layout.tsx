@@ -7,6 +7,7 @@ import { Nav } from "./_components/nav";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { extractRouterConfig } from "uploadthing/server";
+import { Toaster } from "sonner";
 
 
 export const metadata = {
@@ -25,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-    <html lang="en" className={`${GeistSans.variable}`}>
+    <html lang="en" className={`${GeistSans.variable} dark`}>
     <NextSSRPlugin
          
           routerConfig={extractRouterConfig(ourFileRouter)}
@@ -39,6 +40,7 @@ export default function RootLayout({
         </div>
         {modal}
         <div id="modal-root" />
+        <Toaster/>
       </body>
     </html>
     </ClerkProvider>
