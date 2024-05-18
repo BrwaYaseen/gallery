@@ -1,6 +1,7 @@
 
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
+import Link from "next/link";
 import { getUserImages } from "~/server/queries";
 
 
@@ -19,8 +20,10 @@ export default async function HomePage() {
       <div className=" flex flex-wrap gap-4 mt-5 justify-center">
       {images.map((image)=>(
         <div key={image.id} className="w-48 flex flex-col">
+          <Link href={`/photos/${image.id}`}>
           <Image src={image.url} style={{objectFit: "contain"}}
           height={194} width={194}  alt="Images"/> 
+          </Link>
           <div>{image.name}</div>
         </div>
       ))}
