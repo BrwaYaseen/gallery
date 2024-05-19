@@ -1,13 +1,15 @@
-import ImagePageView from "~/components/full-image-page";
+import ImagePageView from "~/common/full-image-page";
 
-export default function PhotoPage({
-    params: {id: photoId},
-}: {
-    params: {id: string};
-}){
-    const idAsNumber = Number(photoId)
-    if(Number.isNaN(idAsNumber)) throw new Error("Invalid Photo Id")
-
-    return <ImagePageView id={idAsNumber}/>
-    
-}
+export default function PhotoModal({
+    params: { id: photoId },
+  }: {
+    params: { id: string };
+  }) {
+    const idAsNumber = Number(photoId);
+  if (Number.isNaN(idAsNumber)) throw new Error("Invalid photo id");
+    return (
+      <div className="flex h-full min-h-0 w-full min-w-0 overflow-y-hidden">
+        <ImagePageView id={idAsNumber} />
+      </div>
+    );
+  }
