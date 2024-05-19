@@ -1,9 +1,8 @@
 import { clerkClient } from "@clerk/nextjs/server";
-import { Button } from "~/components/ui/button";
-import { DeleteImage, getImage } from "~/server/queries";
+import { getImage } from "~/server/queries";
 
 
-export default async function ImagePageView(props: {id: number})
+export default async function ImagePageViewModal(props: {id: number})
     {
    
     const image = await getImage(props.id)
@@ -24,21 +23,9 @@ export default async function ImagePageView(props: {id: number})
                     <span>Uploaded By: </span>
                     <span> {uploaderInfo.fullName}</span>
                 </div>
-                <div className=" flex flex-col p-2 text-center border-b">
+                <div className=" flex flex-col p-2 text-center">
                     <span>Published On: </span>
                     <span> {new Date(image.createdAt).toLocaleDateString()}</span>
-                </div>
-                <div className=" p-4 text-center">
-                    <form action={async()=> {
-                        "use server";
-
-                       await DeleteImage(props.id)
-
-                     
-                    }} >
-
-                    <Button type="submit" variant="destructive">Delete</Button>
-                    </form>
                 </div>
              </div>
         </div>
