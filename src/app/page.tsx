@@ -24,7 +24,6 @@ export default async function HomePage() {
           <Image src={image.url} style={{objectFit: "contain"}}
           height={194} width={194}  alt="Images"/> 
           </Link>
-          <div>{image.name}</div>
         </div>
       ))}
       
