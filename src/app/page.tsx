@@ -39,7 +39,7 @@ export default async function HomePage() {
           <div key={image.id}>
             <Link
               href={`/photos/${image.id}`}
-              className="after:content after:shadow-highlight group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg"
+              className="after:content after:shadow-highlight group relative mb-5 block w-full after:pointer-events-none after:absolute after:inset-0 after:rounded-lg"
             >
               <Image
                 src={image.url}
@@ -64,7 +64,6 @@ export default async function HomePage() {
     <main className="mx-auto max-w-[1960px] p-4">
       <SignedOut>
         <div className=" h-full w-full p-4 text-center text-2xl">
-          {" "}
           Please Sign in
         </div>
       </SignedOut>
