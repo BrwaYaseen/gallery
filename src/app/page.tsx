@@ -20,7 +20,7 @@ export default function HomePage() {
         <div className="after:content shadow-highlight after:shadow-highlight relative mb-5 flex h-[629px] flex-col items-center justify-end gap-4 overflow-hidden rounded-lg bg-white/10 px-6 pb-16 pt-64 text-center text-white after:pointer-events-none after:absolute after:inset-0 after:rounded-lg lg:pt-0">
           <div className="absolute inset-0 flex items-center justify-center opacity-20">
             <span className="flex max-h-full max-w-full items-center justify-center">
-              <Image src="/Gallery.jpg" fill alt="Intial Image" />
+              <Image src="/Gallery.jpg" fill alt="Initial Image" />
             </span>
             <span className="absolute bottom-0 left-0 right-0 h-[400px] bg-gradient-to-b from-black/0 via-black to-black"></span>
           </div>
@@ -66,6 +66,9 @@ export default function HomePage() {
                   alt={`Selected image ${image.id}`}
                   fill
                   style={{ objectFit: "contain" }}
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+F9PQAI8wNPvd7POQAAAABJRU5ErkJggg=="
                 />
               </div>
               <div className="mt-4 flex justify-end space-x-2">
