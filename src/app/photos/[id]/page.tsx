@@ -10,14 +10,14 @@ interface Props {
 }
 
 export default async function FullImageView({ params }: Props) {
-  const imageId = parseInt(params.id, 10); // Convert id to a number
+  const imageId = parseInt(params.id, 10);
   const image = await getImage(imageId);
   const uploaderInfo = await clerkClient.users.getUser(image.userId);
 
   return (
-    <div className="flex h-full w-full min-w-0 flex-col md:flex-row">
-      <div className="flex h-2/3 w-full items-center justify-center p-4 md:h-full">
-        <div className="relative h-full max-h-96 w-full md:max-h-full">
+    <div className="grid h-full w-full min-w-0 grid-cols-1 md:grid-cols-4">
+      <div className="col-span-1 flex items-center justify-center p-4 md:col-span-3 md:h-full">
+        <div className="relative h-screen w-full md:h-full">
           <Image
             src={image.url}
             alt={image.name}
@@ -27,7 +27,7 @@ export default async function FullImageView({ params }: Props) {
           />
         </div>
       </div>
-      <div className="flex w-full flex-shrink-0 flex-col items-center border-t md:w-64 md:border-l md:border-t-0">
+      <div className="col-span-1 flex w-full flex-shrink-0 flex-col border-t md:border-l md:border-t-0">
         <div className="border-b p-4 text-center text-lg font-semibold">
           {image.name}
         </div>
