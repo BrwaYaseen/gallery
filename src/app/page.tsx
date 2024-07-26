@@ -2,10 +2,16 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { getUserImages } from "~/server/queries";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "../components/ui/alert-dialog";
+import { Button } from "../components/ui/button";
 
 export const dynamic = "force-dynamic";
 
-export default async function HomePage() {
+export default function HomePage() {
   const Images = async () => {
     const images = await getUserImages();
 
@@ -36,25 +42,44 @@ export default async function HomePage() {
           </a>
         </div>
         {images.map((image) => (
-          <div key={image.id}>
-            <Link
-              href={`/photos/${image.id}`}
-              className="after:content after:shadow-highlight group relative mb-5 block w-full after:pointer-events-none after:absolute after:inset-0 after:rounded-lg"
-            >
-              <Image
-                src={image.url}
-                className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
-                style={{ transform: "translate3d(0, 0, 0)" }}
-                width={720}
-                height={480}
-                sizes="(max-width: 640px) 100vw,
-           (max-width: 1280px) 50vw,
-           (max-width: 1536px) 33vw,
-           25vw"
-                alt="Images"
-              />
-            </Link>
-          </div>
+          <AlertDialog key={image.id}>
+            <AlertDialogTrigger asChild>
+              <div className="after:content after:shadow-highlight group relative mb-5 block w-full cursor-pointer after:pointer-events-none after:absolute after:inset-0 after:rounded-lg">
+                <Image
+                  src={image.url}
+                  className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
+                  style={{ transform: "translate3d(0, 0, 0)" }}
+                  width={720}
+                  height={480}
+                  sizes="(max-width: 640px) 100vw,
+                   (max-width: 1280px) 50vw,
+                   (max-width: 1536px) 33vw,
+                   25vw"
+                  alt={`Image ${image.id}`}
+                />
+              </div>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="max-w-3xl">
+              <div className="relative aspect-video w-full">
+                <Image
+                  src={image.url}
+                  alt={`Selected image ${image.id}`}
+                  fill
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
+              <div className="mt-4 flex justify-end space-x-2">
+                <AlertDialogTrigger asChild>
+                  <Button variant="outline">Close</Button>
+                </AlertDialogTrigger>
+                <Link href={`/photos/${image.id}`} passHref>
+                  <Button asChild>
+                    <p>View Full Page</p>
+                  </Button>
+                </Link>
+              </div>
+            </AlertDialogContent>
+          </AlertDialog>
         ))}
       </div>
     );
@@ -64,6 +89,7 @@ export default async function HomePage() {
     <main className="mx-auto max-w-[1960px] p-4">
       <SignedOut>
         <div className=" h-full w-full p-4 text-center text-2xl">
+          {" "}
           Please Sign in
         </div>
       </SignedOut>

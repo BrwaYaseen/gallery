@@ -15,32 +15,34 @@ export default async function FullImageView({ params }: Props) {
   const uploaderInfo = await clerkClient.users.getUser(image.userId);
 
   return (
-    <div className="flex h-full w-full min-w-0">
-      <div className="flex h-full w-full items-center justify-center">
-        <div className="relative h-full w-full">
+    <div className="flex h-full w-full min-w-0 flex-col md:flex-row">
+      <div className="flex h-2/3 w-full items-center justify-center p-4 md:h-full">
+        <div className="relative h-full max-h-96 w-full md:max-h-full">
           <Image
             src={image.url}
             alt={image.name}
             layout="fill"
             objectFit="contain"
+            className="rounded-md shadow-md"
           />
         </div>
       </div>
-      <div className="flex w-48 flex-shrink-0 flex-col border-l">
-        <div className="border-b p-2 text-center text-lg">{image.name}</div>
-        <div className="flex flex-col border-b p-2 text-center">
-          <span>Uploaded By: </span>
+      <div className="flex w-full flex-shrink-0 flex-col items-center border-t md:w-64 md:border-l md:border-t-0">
+        <div className="border-b p-4 text-center text-lg font-semibold">
+          {image.name}
+        </div>
+        <div className="flex flex-col border-b p-4 text-center">
+          <span className="font-medium">Uploaded By:</span>
           <span>{uploaderInfo.fullName}</span>
         </div>
-        <div className="flex flex-col border-b p-2 text-center">
-          <span>Published On: </span>
+        <div className="flex flex-col border-b p-4 text-center">
+          <span className="font-medium">Published On:</span>
           <span>{new Date(image.createdAt).toLocaleDateString()}</span>
         </div>
-        <div className=" p-4 text-center">
+        <div className="p-4 text-center">
           <form
             action={async () => {
               "use server";
-
               await DeleteImage(imageId);
             }}
           >
